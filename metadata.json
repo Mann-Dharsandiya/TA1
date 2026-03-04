@@ -1,5 +1,5 @@
 {
-  "name": "AI Team Architect Pro",
-  "description": "A collaborative system architecture for an AI platform featuring LSTM and Transformer models, designed for a 4-developer team with clear role separation.",
+  "name": "DevOps Task Architect",
+  "description": "A comprehensive architectural blueprint for a DevOps-based Task Management System, detailing team roles, pipeline stages, and a 15-week sprint plan.",
   "requestFramePermissions": []
 }

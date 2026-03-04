@@ -25,128 +25,136 @@ import {
   Users,
   FileSpreadsheet,
   BrainCircuit,
-  Network
+  Network,
+  ClipboardList,
+  Clock,
+  CheckCircle2,
+  Flag
 } from 'lucide-react';
+
+export const PROJECT_OVERVIEW = {
+  title: "DevOps-Based Task Management System",
+  stack: ["React.js", "Node.js", "SQL"],
+  duration: "15 Weeks",
+  teamSize: "4 FTE",
+  loadFactor: "0.8"
+};
+
+export const TEAM_ROLES = [
+  { id: 'arch', role: 'Architect', name: 'Anurag', fte: 1, icon: Server },
+  { id: 'des', role: 'Designer', name: 'Anurag', fte: 1, icon: Globe },
+  { id: 'dev', role: 'Developer', name: 'Mann, Omkar', fte: 2, icon: Code2 },
+  { id: 'test', role: 'Integration Tester', name: 'Amit', fte: 1, icon: ShieldCheck },
+  { id: 'pm', role: 'Product Manager', name: 'Mann', fte: 1, icon: User },
+  { id: 'rel', role: 'Release Engineer', name: 'Anurag, Omkar', fte: 2, icon: GitBranch },
+  { id: 'scrum', role: 'Scrum Master', name: 'Omkar', fte: 1, icon: Users }
+];
+
+export const PIPELINE_STAGES = [
+  { stage: 'Discovery', duration: 2, role: 'Architect / PM', icon: Search },
+  { stage: 'Build', duration: 3, role: 'Developers', icon: Code2 },
+  { stage: 'Integration', duration: 4, role: 'Testers', icon: ShieldCheck },
+  { stage: 'Deployment', duration: 3, role: 'Release Engineers', icon: Cloud },
+  { stage: 'Monitoring', duration: 2, role: 'Release Engineers', icon: Activity }
+];
+
+export const SPRINT_PLAN = [
+  {
+    sprint: 1,
+    weeks: "1-2",
+    goal: "Git & GitHub (VCS Foundation)",
+    activities: "Repository cleanup, branching strategy, commit conventions, GitHub issues, release tagging",
+    version: "v1.0.1",
+    remarks: "Version control stabilized",
+    utilization: "Medium"
+  },
+  {
+    sprint: 2,
+    weeks: "3-4",
+    goal: "Jenkins Installation & Git Integration",
+    activities: "Jenkins install & config, GitHub webhook, CI job setup, build trigger on commit",
+    version: "v1.1.0",
+    remarks: "CI enabled",
+    utilization: "Medium"
+  },
+  {
+    sprint: 3,
+    weeks: "5-6",
+    goal: "Jenkins Build & Test Automation",
+    activities: "Jenkinsfile creation, automated build, unit tests, artifact archiving",
+    version: "v1.2.0",
+    remarks: "Stable CI pipeline",
+    utilization: "High"
+  },
+  {
+    sprint: 4,
+    weeks: "7-8",
+    goal: "Docker Fundamentals",
+    activities: "Docker installation, Dockerfile creation, image build & run, container testing",
+    version: "v1.3.0",
+    remarks: "Backend containerized",
+    utilization: "High"
+  },
+  {
+    sprint: 5,
+    weeks: "9-10",
+    goal: "Multi-Container Setup",
+    activities: "Frontend & backend containerization, env variables, networking, port exposure",
+    version: "v1.4.0",
+    remarks: "Multi-container system",
+    utilization: "High"
+  },
+  {
+    sprint: 6,
+    weeks: "11-12",
+    goal: "Jenkins + Docker Integration",
+    activities: "Jenkins Docker plugin, image build in pipeline, tagging, auto container restart",
+    version: "v1.5.0",
+    remarks: "CI -> Docker automation",
+    utilization: "High"
+  },
+  {
+    sprint: 7,
+    weeks: "13-15",
+    goal: "Container Stability & Release",
+    activities: "Health checks, logging, restart policies, rollback, LTS release completed",
+    version: "v1.6.0",
+    remarks: "LTS release completed",
+    utilization: "Medium"
+  }
+];
 
 export const ARCHITECTURE_LAYERS = [
   {
     id: 'ui',
-    title: 'User Interface Layer',
+    title: 'Frontend Layer',
     icon: Globe,
-    description: 'Web dashboard for data upload, monitoring, and prediction visualization.',
-    tech: ['React', 'Tailwind CSS'],
-    details: 'Provides a portal for users to upload CSV datasets and view model performance metrics.'
+    description: 'Task Dashboard & Management UI.',
+    tech: ['React.js', 'Tailwind CSS'],
+    details: 'User interface for creating, tracking, and managing tasks.'
   },
   {
     id: 'api',
-    title: 'Backend API Layer',
+    title: 'API Layer',
     icon: ShieldCheck,
-    description: 'RESTful endpoints for data management and model inference.',
-    tech: ['FastAPI', 'Python', 'Google APIs'],
-    details: 'Handles authentication, data routing, and serves as the bridge between the UI and ML models.'
+    description: 'Business logic and task orchestration.',
+    tech: ['Node.js', 'Express'],
+    details: 'RESTful API handling task CRUD operations and user authentication.'
   },
   {
-    id: 'processing',
-    title: 'Data Processing Layer',
+    id: 'data',
+    title: 'Database Layer',
     icon: Database,
-    description: 'CSV cleaning, feature engineering, and pipeline management.',
-    tech: ['Pandas', 'NumPy', 'Scikit-learn'],
-    details: 'Automated pipelines for cleaning raw CSV data and preparing it for model consumption.'
+    description: 'Persistent storage for tasks and users.',
+    tech: ['SQL', 'PostgreSQL/MySQL'],
+    details: 'Relational database for structured task data storage.'
   },
   {
-    id: 'training',
-    title: 'Model Training Layer',
-    icon: BrainCircuit,
-    description: 'LSTM and Transformer model training environment.',
-    tech: ['TensorFlow', 'PyTorch', 'Vertex AI'],
-    details: 'Compute-intensive layer for training sequential and attention-based models.'
-  },
-  {
-    id: 'testing',
-    title: 'Model Testing Layer',
-    icon: LineChart,
-    description: 'Evaluation, validation, and performance comparison.',
-    tech: ['MLflow', 'TensorBoard'],
-    details: 'Rigorous testing against hold-out sets to ensure accuracy and robustness.'
-  },
-  {
-    id: 'deployment',
-    title: 'Deployment Layer',
-    icon: Server,
-    description: 'Containerized production environment.',
-    tech: ['Docker', 'Kubernetes', 'GitHub Actions'],
-    details: 'Scalable infrastructure for serving models in a high-availability production setting.'
+    id: 'devops',
+    title: 'DevOps Layer',
+    icon: GitBranch,
+    description: 'CI/CD and Containerization.',
+    tech: ['Jenkins', 'Docker', 'GitHub'],
+    details: 'Automated build, test, and deployment pipelines.'
   }
-];
-
-export const TEAM_ROLES = [
-  {
-    id: 'dev1',
-    role: 'Developer 1 – Backend Developer',
-    icon: Code2,
-    responsibilities: [
-      'Building backend APIs (FastAPI/Flask)',
-      'Handling data upload and retrieval',
-      'Connecting frontend with ML models',
-      'Managing CSV dataset storage',
-      'Integrating Google Cloud services'
-    ],
-    color: 'border-blue-500 text-blue-600'
-  },
-  {
-    id: 'dev2',
-    role: 'Developer 2 – Data Engineer',
-    icon: FileSpreadsheet,
-    responsibilities: [
-      'Preparing and cleaning CSV datasets',
-      'Feature engineering and selection',
-      'Splitting data into train/test sets',
-      'Creating automated data pipelines',
-      'Ensuring data quality and integrity'
-    ],
-    color: 'border-emerald-500 text-emerald-600'
-  },
-  {
-    id: 'dev3',
-    role: 'Developer 3 – Deep Learning Engineer',
-    icon: Network,
-    responsibilities: [
-      'Implementing LSTM networks',
-      'Handling time-series/sequential data',
-      'Model optimization & hyperparameter tuning',
-      'Deep learning model training',
-      'Implementing sequence-to-sequence logic'
-    ],
-    color: 'border-purple-500 text-purple-600'
-  },
-  {
-    id: 'dev4',
-    role: 'Developer 4 – Transformer / AI Engineer',
-    icon: BrainCircuit,
-    responsibilities: [
-      'Implementing Transformer-based models',
-      'NLP and sequence processing',
-      'Model evaluation & comparison',
-      'Integrating Transformers with APIs',
-      'Fine-tuning attention mechanisms'
-    ],
-    color: 'border-amber-500 text-amber-600'
-  }
-];
-
-export const DATA_FLOW_STEPS = [
-  { step: 1, action: 'CSV Ingestion', detail: 'Raw CSV files are uploaded via the UI to Cloud Storage.' },
-  { step: 2, action: 'Preprocessing', detail: 'Data Engineer cleans data and performs feature engineering.' },
-  { step: 3, action: 'Data Splitting', detail: 'Dataset is divided into Training, Validation, and Testing sets.' },
-  { step: 4, action: 'Parallel Training', detail: 'LSTM and Transformer models are trained simultaneously.' },
-  { step: 5, action: 'Model Validation', detail: 'Performance is tested and compared using standardized metrics.' },
-  { step: 6, action: 'API Deployment', detail: 'Best models are containerized and exposed via FastAPI.' },
-  { step: 7, action: 'Inference Request', detail: 'Backend receives prediction requests and returns AI results.' }
-];
-
-export const TECH_STACK = [
-  { category: 'Languages', items: ['Python', 'TypeScript', 'SQL'] },
-  { category: 'Frameworks', items: ['FastAPI', 'TensorFlow', 'PyTorch'] },
-  { category: 'Infrastructure', items: ['Docker', 'Kubernetes', 'Google Cloud'] },
-  { category: 'DevOps', items: ['GitHub Actions', 'Artifact Registry', 'Cloud Build'] }
 ];
