@@ -21,7 +21,11 @@ import {
   LineChart,
   Lock,
   Globe,
-  Bot
+  Bot,
+  Users,
+  FileSpreadsheet,
+  BrainCircuit,
+  Network
 } from 'lucide-react';
 
 export const ARCHITECTURE_LAYERS = [
@@ -29,92 +33,120 @@ export const ARCHITECTURE_LAYERS = [
     id: 'ui',
     title: 'User Interface Layer',
     icon: Globe,
-    description: 'Entry point for users, providing interactive dashboards and interfaces.',
-    tech: ['React', 'Tailwind CSS', 'Cloud CDN'],
-    details: 'Responsive web application hosted on Firebase Hosting or Cloud Storage with Cloud CDN for global low-latency delivery.'
+    description: 'Web dashboard for data upload, monitoring, and prediction visualization.',
+    tech: ['React', 'Tailwind CSS'],
+    details: 'Provides a portal for users to upload CSV datasets and view model performance metrics.'
   },
   {
-    id: 'gateway',
-    title: 'API Gateway Layer',
+    id: 'api',
+    title: 'Backend API Layer',
     icon: ShieldCheck,
-    description: 'Security, rate limiting, and request routing.',
-    tech: ['Apigee', 'Cloud Endpoints', 'Cloud Load Balancing'],
-    details: 'Manages API traffic, enforces IAM policies, and routes requests to appropriate backend services.'
+    description: 'RESTful endpoints for data management and model inference.',
+    tech: ['FastAPI', 'Python', 'Google APIs'],
+    details: 'Handles authentication, data routing, and serves as the bridge between the UI and ML models.'
   },
   {
     id: 'processing',
-    title: 'AI/ML Processing Layer',
-    icon: Cpu,
-    description: 'Core intelligence and reasoning engine.',
-    tech: ['Vertex AI', 'Gemini API', 'Cloud Run'],
-    details: 'Handles inference requests, orchestrates agentic workflows, and executes transformer-based reasoning.'
-  },
-  {
-    id: 'data',
     title: 'Data Processing Layer',
     icon: Database,
-    description: 'Structured and unstructured data management.',
-    tech: ['BigQuery', 'Cloud Storage', 'Cloud SQL', 'Pub/Sub'],
-    details: 'Scalable data lake and warehouse for training data, logs, and application state.'
+    description: 'CSV cleaning, feature engineering, and pipeline management.',
+    tech: ['Pandas', 'NumPy', 'Scikit-learn'],
+    details: 'Automated pipelines for cleaning raw CSV data and preparing it for model consumption.'
   },
   {
-    id: 'mlops',
-    title: 'Model Training & MLOps',
-    icon: Workflow,
-    description: 'ML lifecycle management and automation.',
-    tech: ['Vertex AI Pipelines', 'Model Registry', 'Feature Store'],
-    details: 'Automated pipelines for data ingestion, preprocessing, training, validation, and deployment.'
+    id: 'training',
+    title: 'Model Training Layer',
+    icon: BrainCircuit,
+    description: 'LSTM and Transformer model training environment.',
+    tech: ['TensorFlow', 'PyTorch', 'Vertex AI'],
+    details: 'Compute-intensive layer for training sequential and attention-based models.'
   },
   {
-    id: 'devops',
-    title: 'DevOps & CI/CD Layer',
-    icon: GitBranch,
-    description: 'Infrastructure as Code and automated delivery.',
-    tech: ['Cloud Build', 'Cloud Deploy', 'Terraform', 'Artifact Registry'],
-    details: 'Automated build and deployment pipelines for microservices and infrastructure.'
+    id: 'testing',
+    title: 'Model Testing Layer',
+    icon: LineChart,
+    description: 'Evaluation, validation, and performance comparison.',
+    tech: ['MLflow', 'TensorBoard'],
+    details: 'Rigorous testing against hold-out sets to ensure accuracy and robustness.'
   },
   {
-    id: 'aiops',
-    title: 'Monitoring & AIOps',
-    icon: Activity,
-    description: 'Intelligent observability and self-healing.',
-    tech: ['Cloud Monitoring', 'Cloud Logging', 'Error Reporting'],
-    details: 'AI-driven anomaly detection and automated incident response based on system logs and metrics.'
-  },
-  {
-    id: 'infrastructure',
-    title: 'Infrastructure Layer',
+    id: 'deployment',
+    title: 'Deployment Layer',
     icon: Server,
-    description: 'Compute and networking foundation.',
-    tech: ['GKE', 'Cloud Run', 'VPC Service Controls'],
-    details: 'Container orchestration and serverless execution environments with strict network isolation.'
+    description: 'Containerized production environment.',
+    tech: ['Docker', 'Kubernetes', 'GitHub Actions'],
+    details: 'Scalable infrastructure for serving models in a high-availability production setting.'
   }
 ];
 
-export const TECH_STACK = [
-  { category: 'Compute', items: ['Google Kubernetes Engine (GKE)', 'Cloud Run', 'Cloud Functions'] },
-  { category: 'AI & ML', items: ['Vertex AI', 'Gemini API', 'TensorFlow', 'PyTorch'] },
-  { category: 'Data', items: ['BigQuery', 'Cloud Storage', 'Pub/Sub', 'Cloud Spanner'] },
-  { category: 'DevOps', items: ['Cloud Build', 'Cloud Deploy', 'Artifact Registry', 'Terraform'] },
-  { category: 'Operations', items: ['Cloud Monitoring', 'Cloud Logging', 'Trace', 'Profiler'] },
-  { category: 'Security', items: ['Cloud IAM', 'Secret Manager', 'Cloud Armor', 'Identity-Aware Proxy'] }
+export const TEAM_ROLES = [
+  {
+    id: 'dev1',
+    role: 'Developer 1 – Backend Developer',
+    icon: Code2,
+    responsibilities: [
+      'Building backend APIs (FastAPI/Flask)',
+      'Handling data upload and retrieval',
+      'Connecting frontend with ML models',
+      'Managing CSV dataset storage',
+      'Integrating Google Cloud services'
+    ],
+    color: 'border-blue-500 text-blue-600'
+  },
+  {
+    id: 'dev2',
+    role: 'Developer 2 – Data Engineer',
+    icon: FileSpreadsheet,
+    responsibilities: [
+      'Preparing and cleaning CSV datasets',
+      'Feature engineering and selection',
+      'Splitting data into train/test sets',
+      'Creating automated data pipelines',
+      'Ensuring data quality and integrity'
+    ],
+    color: 'border-emerald-500 text-emerald-600'
+  },
+  {
+    id: 'dev3',
+    role: 'Developer 3 – Deep Learning Engineer',
+    icon: Network,
+    responsibilities: [
+      'Implementing LSTM networks',
+      'Handling time-series/sequential data',
+      'Model optimization & hyperparameter tuning',
+      'Deep learning model training',
+      'Implementing sequence-to-sequence logic'
+    ],
+    color: 'border-purple-500 text-purple-600'
+  },
+  {
+    id: 'dev4',
+    role: 'Developer 4 – Transformer / AI Engineer',
+    icon: BrainCircuit,
+    responsibilities: [
+      'Implementing Transformer-based models',
+      'NLP and sequence processing',
+      'Model evaluation & comparison',
+      'Integrating Transformers with APIs',
+      'Fine-tuning attention mechanisms'
+    ],
+    color: 'border-amber-500 text-amber-600'
+  }
 ];
 
 export const DATA_FLOW_STEPS = [
-  { step: 1, action: 'User Request', detail: 'User submits a natural language query via the UI.' },
-  { step: 2, action: 'API Gateway', detail: 'Request is authenticated and routed via Cloud Load Balancing.' },
-  { step: 3, action: 'Agent Orchestrator', detail: 'An AI Agent (Gemini) analyzes the intent and plans tasks.' },
-  { step: 4, action: 'Data Retrieval', detail: 'Agent fetches relevant context from BigQuery or Vector Search.' },
-  { step: 5, action: 'Model Inference', detail: 'Transformer models process the query with the retrieved context.' },
-  { step: 6, action: 'Task Execution', detail: 'Agent executes necessary actions (e.g., API calls, data updates).' },
-  { step: 7, action: 'Response Generation', detail: 'Final response is synthesized and sent back to the user.' }
+  { step: 1, action: 'CSV Ingestion', detail: 'Raw CSV files are uploaded via the UI to Cloud Storage.' },
+  { step: 2, action: 'Preprocessing', detail: 'Data Engineer cleans data and performs feature engineering.' },
+  { step: 3, action: 'Data Splitting', detail: 'Dataset is divided into Training, Validation, and Testing sets.' },
+  { step: 4, action: 'Parallel Training', detail: 'LSTM and Transformer models are trained simultaneously.' },
+  { step: 5, action: 'Model Validation', detail: 'Performance is tested and compared using standardized metrics.' },
+  { step: 6, action: 'API Deployment', detail: 'Best models are containerized and exposed via FastAPI.' },
+  { step: 7, action: 'Inference Request', detail: 'Backend receives prediction requests and returns AI results.' }
 ];
 
-export const MLOPS_STAGES = [
-  { name: 'Ingestion', icon: Database, color: 'bg-blue-500' },
-  { name: 'Preprocessing', icon: Settings, color: 'bg-indigo-500' },
-  { name: 'Training', icon: Cpu, color: 'bg-purple-500' },
-  { name: 'Validation', icon: ShieldCheck, color: 'bg-pink-500' },
-  { name: 'Deployment', icon: Box, color: 'bg-orange-500' },
-  { name: 'Monitoring', icon: Activity, color: 'bg-emerald-500' }
+export const TECH_STACK = [
+  { category: 'Languages', items: ['Python', 'TypeScript', 'SQL'] },
+  { category: 'Frameworks', items: ['FastAPI', 'TensorFlow', 'PyTorch'] },
+  { category: 'Infrastructure', items: ['Docker', 'Kubernetes', 'Google Cloud'] },
+  { category: 'DevOps', items: ['GitHub Actions', 'Artifact Registry', 'Cloud Build'] }
 ];

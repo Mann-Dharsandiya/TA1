@@ -26,14 +26,18 @@ import {
   ArrowRight,
   CheckCircle2,
   AlertCircle,
-  Info
+  Info,
+  Users,
+  FileSpreadsheet,
+  BrainCircuit,
+  Network
 } from 'lucide-react';
 import { cn } from './lib/utils';
 import { 
   ARCHITECTURE_LAYERS, 
   TECH_STACK, 
   DATA_FLOW_STEPS, 
-  MLOPS_STAGES 
+  TEAM_ROLES 
 } from './constants';
 
 const SidebarItem = ({ icon: Icon, label, active, onClick }: { icon: any, label: string, active: boolean, onClick: () => void }) => (
@@ -71,19 +75,19 @@ export default function App() {
             className="space-y-8"
           >
             <SectionHeader 
-              title="System Architecture Overview" 
-              subtitle="High-level blueprint of the AI-powered enterprise platform on Google Cloud."
+              title="System Architecture Blueprint" 
+              subtitle="A collaborative AI platform architecture designed for a 4-developer team."
             />
             
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
               <div className="lg:col-span-2 space-y-6">
                 <div className="glass-card p-8 relative overflow-hidden">
                   <div className="absolute top-0 right-0 p-4 opacity-5">
-                    <Cloud size={120} />
+                    <BrainCircuit size={120} />
                   </div>
                   <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
                     <Layers className="text-blue-600" size={20} />
-                    Layered Architecture
+                    Architecture Layers
                   </h3>
                   <div className="flex flex-col gap-4">
                     {ARCHITECTURE_LAYERS.map((layer, idx) => (
@@ -112,48 +116,43 @@ export default function App() {
               <div className="space-y-6">
                 <div className="glass-card p-6">
                   <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
-                    <Zap className="text-amber-500" size={20} />
-                    System Goals
+                    <Users className="text-blue-600" size={20} />
+                    Team Composition
                   </h3>
-                  <ul className="space-y-4">
-                    {[
-                      { title: 'Scalability', desc: 'Auto-scaling compute via GKE and Cloud Run.', icon: ArrowRight },
-                      { title: 'Intelligence', desc: 'Agentic reasoning with Gemini & Vertex AI.', icon: Bot },
-                      { title: 'Automation', desc: 'Full MLOps & DevOps CI/CD pipelines.', icon: Workflow },
-                      { title: 'Observability', desc: 'AIOps driven monitoring and healing.', icon: Activity }
-                    ].map((goal) => (
-                      <li key={goal.title} className="flex gap-3">
-                        <div className="mt-1 text-blue-600"><goal.icon size={16} /></div>
-                        <div>
-                          <p className="text-sm font-medium text-slate-900">{goal.title}</p>
-                          <p className="text-xs text-slate-500">{goal.desc}</p>
-                        </div>
-                      </li>
+                  <div className="space-y-3">
+                    {TEAM_ROLES.map((role) => (
+                      <div key={role.id} className={cn("p-3 rounded-lg border-l-4 bg-slate-50", role.color)}>
+                        <p className="text-xs font-bold uppercase tracking-wider">{role.role.split(' – ')[1]}</p>
+                        <p className="text-[10px] text-slate-500 mt-0.5">Assigned to {role.role.split(' – ')[0]}</p>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
                 </div>
 
                 <div className="glass-card p-6 bg-slate-900 text-white border-none">
                   <h3 className="text-lg font-medium mb-4 flex items-center gap-2">
-                    <ShieldCheck className="text-emerald-400" size={20} />
-                    Security Posture
+                    <Zap className="text-amber-400" size={20} />
+                    Project Goals
                   </h3>
-                  <div className="space-y-3">
-                    <div className="p-3 rounded-lg bg-white/5 border border-white/10">
-                      <p className="text-xs font-mono text-emerald-400 mb-1">IDENTITY & ACCESS</p>
-                      <p className="text-sm text-slate-300">IAM-based least privilege access control across all resources.</p>
-                    </div>
-                    <div className="p-3 rounded-lg bg-white/5 border border-white/10">
-                      <p className="text-xs font-mono text-emerald-400 mb-1">DATA PROTECTION</p>
-                      <p className="text-sm text-slate-300">Encryption at rest and in transit with Customer-Managed Encryption Keys (CMEK).</p>
-                    </div>
-                  </div>
+                  <ul className="space-y-3">
+                    {[
+                      'Process structured CSV datasets',
+                      'Train LSTM & Transformer models',
+                      'Expose results via Backend APIs',
+                      'Automated CI/CD with Docker'
+                    ].map((goal) => (
+                      <li key={goal} className="flex items-center gap-2 text-sm text-slate-300">
+                        <CheckCircle2 size={14} className="text-emerald-400" />
+                        {goal}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>
           </motion.div>
         );
-      case 'ai-ml':
+      case 'team':
         return (
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
@@ -161,95 +160,33 @@ export default function App() {
             className="space-y-8"
           >
             <SectionHeader 
-              title="AI & Machine Learning Engine" 
-              subtitle="Deep dive into the transformer models, agentic AI, and generative capabilities."
+              title="Developer Responsibilities" 
+              subtitle="Clear division of tasks for a high-performance 4-developer team."
             />
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="glass-card p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-purple-100 text-purple-600 rounded-lg">
-                    <Bot size={24} />
-                  </div>
-                  <h3 className="text-xl font-semibold">Agentic AI Framework</h3>
-                </div>
-                <p className="text-slate-600 mb-6 leading-relaxed">
-                  Our platform utilizes an autonomous agent framework built on Vertex AI. Agents are capable of multi-step reasoning, tool use, and self-correction.
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="mt-1 text-purple-500"><CheckCircle2 size={18} /></div>
-                    <div>
-                      <h4 className="text-sm font-medium">Reasoning Engine</h4>
-                      <p className="text-xs text-slate-500 mt-1">Leveraging Gemini Pro for complex chain-of-thought reasoning and planning.</p>
+              {TEAM_ROLES.map((role) => (
+                <div key={role.id} className="glass-card p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className={cn("p-2 rounded-lg bg-slate-100", role.color.split(' ')[1])}>
+                      <role.icon size={24} />
                     </div>
+                    <h3 className="text-xl font-semibold">{role.role}</h3>
                   </div>
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="mt-1 text-purple-500"><CheckCircle2 size={18} /></div>
-                    <div>
-                      <h4 className="text-sm font-medium">Tool Use (Function Calling)</h4>
-                      <p className="text-xs text-slate-500 mt-1">Agents can interact with external APIs, databases, and services via structured function calls.</p>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3 p-4 rounded-xl bg-slate-50 border border-slate-100">
-                    <div className="mt-1 text-purple-500"><CheckCircle2 size={18} /></div>
-                    <div>
-                      <h4 className="text-sm font-medium">Memory Management</h4>
-                      <p className="text-xs text-slate-500 mt-1">Short-term context window management and long-term retrieval via Vector Search.</p>
-                    </div>
-                  </div>
+                  <ul className="space-y-3">
+                    {role.responsibilities.map((resp, i) => (
+                      <li key={i} className="flex items-start gap-3 text-sm text-slate-600">
+                        <div className="mt-1 text-slate-400"><ArrowRight size={14} /></div>
+                        {resp}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              </div>
-
-              <div className="glass-card p-8">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="p-2 bg-blue-100 text-blue-600 rounded-lg">
-                    <Cpu size={24} />
-                  </div>
-                  <h3 className="text-xl font-semibold">Transformer Models</h3>
-                </div>
-                <div className="space-y-6">
-                  <div>
-                    <h4 className="text-sm font-medium text-slate-900 mb-2">NLP & Understanding</h4>
-                    <p className="text-sm text-slate-600">State-of-the-art transformer architectures (BERT, T5, Gemini) for semantic search, sentiment analysis, and entity extraction.</p>
-                  </div>
-                  <div className="h-px bg-slate-100" />
-                  <div>
-                    <h4 className="text-sm font-medium text-slate-900 mb-2">Generative Capabilities</h4>
-                    <p className="text-sm text-slate-600">Multimodal generation including text, code, and images using Vertex AI Generative AI Studio.</p>
-                  </div>
-                  <div className="h-px bg-slate-100" />
-                  <div>
-                    <h4 className="text-sm font-medium text-slate-900 mb-2">Custom Model Training</h4>
-                    <p className="text-sm text-slate-600">Deep learning models built with TensorFlow and PyTorch, trained on Vertex AI Training with GPU/TPU acceleration.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="glass-card p-8">
-              <h3 className="text-lg font-medium mb-6">MLOps Lifecycle</h3>
-              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                {MLOPS_STAGES.map((stage, idx) => (
-                  <React.Fragment key={stage.name}>
-                    <div className="flex flex-col items-center gap-3 group cursor-default">
-                      <div className={cn("w-14 h-14 rounded-full flex items-center justify-center text-white shadow-lg transition-transform group-hover:scale-110", stage.color)}>
-                        <stage.icon size={24} />
-                      </div>
-                      <span className="text-sm font-medium text-slate-700">{stage.name}</span>
-                    </div>
-                    {idx < MLOPS_STAGES.length - 1 && (
-                      <div className="hidden md:block flex-1 h-px bg-slate-200 relative">
-                        <ArrowRight size={14} className="absolute -top-[7px] left-1/2 -translate-x-1/2 text-slate-300" />
-                      </div>
-                    )}
-                  </React.Fragment>
-                ))}
-              </div>
+              ))}
             </div>
           </motion.div>
         );
-      case 'devops':
+      case 'pipelines':
         return (
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
@@ -257,58 +194,41 @@ export default function App() {
             className="space-y-8"
           >
             <SectionHeader 
-              title="DevOps & AIOps" 
-              subtitle="Automation, CI/CD, and intelligent system monitoring."
+              title="Model & Data Pipelines" 
+              subtitle="How LSTM and Transformer models are trained, validated, and deployed."
             />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="glass-card p-8">
                 <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-                  <GitBranch className="text-indigo-600" size={20} />
-                  CI/CD Pipeline
+                  <Network className="text-purple-600" size={20} />
+                  LSTM Pipeline (Deep Learning)
                 </h3>
-                <div className="relative pl-8 space-y-8 before:content-[''] before:absolute before:left-[15px] before:top-2 before:bottom-2 before:w-0.5 before:bg-slate-100">
-                  {[
-                    { title: 'Source Control', desc: 'Git-based workflow with Cloud Source Repositories.', icon: Code2 },
-                    { title: 'Build & Test', desc: 'Cloud Build triggers automated unit and integration tests.', icon: Terminal },
-                    { title: 'Artifact Management', desc: 'Container images stored in Artifact Registry.', icon: Box },
-                    { title: 'Automated Deployment', desc: 'Cloud Deploy orchestrates releases to GKE and Cloud Run.', icon: Cloud }
-                  ].map((step) => (
-                    <div key={step.title} className="relative">
-                      <div className="absolute -left-[25px] top-1 w-4 h-4 rounded-full bg-white border-2 border-indigo-500 z-10" />
-                      <h4 className="text-sm font-semibold text-slate-900">{step.title}</h4>
-                      <p className="text-xs text-slate-500 mt-1">{step.desc}</p>
-                    </div>
-                  ))}
+                <div className="space-y-4">
+                  <div className="p-4 rounded-xl bg-purple-50 border border-purple-100">
+                    <h4 className="text-sm font-medium text-purple-900">Sequential Processing</h4>
+                    <p className="text-xs text-purple-700 mt-1">Designed for time-series or sequential data extracted from CSVs. Developer 3 manages the LSTM architecture.</p>
+                  </div>
+                  <div className="p-4 rounded-xl bg-slate-50 border border-slate-100">
+                    <h4 className="text-sm font-medium text-slate-900">Optimization</h4>
+                    <p className="text-xs text-slate-700 mt-1">Hyperparameter tuning using Keras Tuner or Optuna to find the best hidden layer sizes and learning rates.</p>
+                  </div>
                 </div>
               </div>
 
               <div className="glass-card p-8">
                 <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-                  <Activity className="text-emerald-600" size={20} />
-                  AIOps & Monitoring
+                  <BrainCircuit className="text-amber-600" size={20} />
+                  Transformer Pipeline (AI Engine)
                 </h3>
-                <div className="space-y-6">
-                  <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-100">
-                    <h4 className="text-sm font-medium text-emerald-900 flex items-center gap-2">
-                      <Search size={16} />
-                      Anomaly Detection
-                    </h4>
-                    <p className="text-xs text-emerald-700 mt-1">AI models analyze Cloud Logging and Monitoring data to detect patterns that deviate from normal system behavior.</p>
-                  </div>
-                  <div className="p-4 rounded-xl bg-blue-50 border border-blue-100">
-                    <h4 className="text-sm font-medium text-blue-900 flex items-center gap-2">
-                      <Zap size={16} />
-                      Predictive Maintenance
-                    </h4>
-                    <p className="text-xs text-blue-700 mt-1">Forecasting potential failures in infrastructure components before they impact user experience.</p>
+                <div className="space-y-4">
+                  <div className="p-4 rounded-xl bg-amber-50 border border-amber-100">
+                    <h4 className="text-sm font-medium text-amber-900">Attention Mechanisms</h4>
+                    <p className="text-xs text-amber-700 mt-1">Implementing self-attention for complex sequence processing. Developer 4 leads the Transformer implementation.</p>
                   </div>
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-100">
-                    <h4 className="text-sm font-medium text-slate-900 flex items-center gap-2">
-                      <Workflow size={16} />
-                      Automated Remediation
-                    </h4>
-                    <p className="text-xs text-slate-700 mt-1">Triggering Cloud Functions to automatically restart services or scale resources based on AIOps alerts.</p>
+                    <h4 className="text-sm font-medium text-slate-900">Evaluation</h4>
+                    <p className="text-xs text-slate-700 mt-1">Comparing Transformer performance against LSTM benchmarks to ensure superior reasoning capabilities.</p>
                   </div>
                 </div>
               </div>
@@ -316,21 +236,21 @@ export default function App() {
 
             <div className="glass-card p-8">
               <h3 className="text-lg font-medium mb-6 flex items-center gap-2">
-                <Server className="text-blue-600" size={20} />
-                Deployment Strategy
+                <GitBranch className="text-indigo-600" size={20} />
+                DevOps & CI/CD Strategy
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="p-4 border border-slate-100 rounded-xl">
-                  <h4 className="font-semibold text-slate-900 mb-2">Blue-Green Deployment</h4>
-                  <p className="text-sm text-slate-500">Using Cloud Deploy to manage parallel environments, ensuring zero-downtime releases and instant rollbacks.</p>
+                  <h4 className="font-semibold text-slate-900 mb-2">GitHub Workflow</h4>
+                  <p className="text-sm text-slate-500">Pull request based development with automated linting and testing on every commit.</p>
                 </div>
                 <div className="p-4 border border-slate-100 rounded-xl">
-                  <h4 className="font-semibold text-slate-900 mb-2">Canary Releases</h4>
-                  <p className="text-sm text-slate-500">Gradual traffic shifting via GKE Ingress or Cloud Run traffic management to validate new versions with a subset of users.</p>
+                  <h4 className="font-semibold text-slate-900 mb-2">Dockerization</h4>
+                  <p className="text-sm text-slate-500">Backend and ML models are containerized for environment parity across dev, test, and prod.</p>
                 </div>
                 <div className="p-4 border border-slate-100 rounded-xl">
-                  <h4 className="font-semibold text-slate-900 mb-2">Infrastructure as Code</h4>
-                  <p className="text-sm text-slate-500">All resources (VPCs, GKE clusters, Vertex AI endpoints) are provisioned and managed via Terraform for consistency.</p>
+                  <h4 className="font-semibold text-slate-900 mb-2">Kubernetes Orchestration</h4>
+                  <p className="text-sm text-slate-500">GKE manages the scaling of prediction APIs to handle varying traffic loads.</p>
                 </div>
               </div>
             </div>
@@ -345,7 +265,7 @@ export default function App() {
           >
             <SectionHeader 
               title="End-to-End Data Flow" 
-              subtitle="Tracing a request from the user interface to the final AI-generated response."
+              subtitle="Tracing the journey from raw CSV data to intelligent API predictions."
             />
 
             <div className="glass-card p-8">
@@ -380,30 +300,30 @@ export default function App() {
       {/* Sidebar */}
       <aside className="w-64 border-r border-slate-200 bg-white p-6 flex flex-col gap-8 sticky top-0 h-screen">
         <div className="flex items-center gap-3 px-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white">
-            <Cloud size={20} />
+          <div className="w-8 h-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
+            <BrainCircuit size={20} />
           </div>
-          <h1 className="font-bold text-slate-900 tracking-tight">CloudArchitect</h1>
+          <h1 className="font-bold text-slate-900 tracking-tight">AI Team Architect</h1>
         </div>
 
         <nav className="flex-1 space-y-1">
           <SidebarItem 
             icon={Layers} 
-            label="Overview" 
+            label="Architecture" 
             active={activeTab === 'overview'} 
             onClick={() => setActiveTab('overview')} 
           />
           <SidebarItem 
-            icon={Cpu} 
-            label="AI & ML Engine" 
-            active={activeTab === 'ai-ml'} 
-            onClick={() => setActiveTab('ai-ml')} 
+            icon={Users} 
+            label="Team Roles" 
+            active={activeTab === 'team'} 
+            onClick={() => setActiveTab('team')} 
           />
           <SidebarItem 
             icon={Workflow} 
-            label="DevOps & AIOps" 
-            active={activeTab === 'devops'} 
-            onClick={() => setActiveTab('devops')} 
+            label="Pipelines" 
+            active={activeTab === 'pipelines'} 
+            onClick={() => setActiveTab('pipelines')} 
           />
           <SidebarItem 
             icon={Zap} 
@@ -419,8 +339,8 @@ export default function App() {
               <User size={16} />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-medium text-slate-900 truncate">Senior Architect</p>
-              <p className="text-[10px] text-slate-500 truncate">v1.0.4-stable</p>
+              <p className="text-xs font-medium text-slate-900 truncate">System Architect</p>
+              <p className="text-[10px] text-slate-500 truncate">Team Edition</p>
             </div>
           </div>
         </div>
@@ -430,22 +350,15 @@ export default function App() {
       <main className="flex-1 p-10 overflow-y-auto">
         <header className="flex items-center justify-between mb-10">
           <div className="flex items-center gap-2 text-sm text-slate-500">
-            <span>Architecture</span>
+            <span>Project</span>
             <ChevronRight size={14} />
             <span className="text-slate-900 font-medium capitalize">{activeTab.replace('-', ' ')}</span>
           </div>
           
           <div className="flex items-center gap-4">
-            <button className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
-              <Bell size={20} />
-            </button>
-            <button className="p-2 text-slate-400 hover:text-slate-600 transition-colors">
-              <Settings size={20} />
-            </button>
-            <div className="h-8 w-px bg-slate-200 mx-2" />
-            <div className="flex items-center gap-2 bg-emerald-50 text-emerald-700 px-3 py-1.5 rounded-full text-xs font-medium border border-emerald-100">
-              <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              System Online
+            <div className="flex items-center gap-2 bg-blue-50 text-blue-700 px-3 py-1.5 rounded-full text-xs font-medium border border-blue-100">
+              <div className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
+              Design Phase
             </div>
           </div>
         </header>
@@ -455,11 +368,11 @@ export default function App() {
         </AnimatePresence>
 
         <footer className="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-400 text-xs">
-          <p>© 2024 CloudArchitect AI Platform. Built on Google Cloud.</p>
+          <p>© 2024 AI Team Architect Pro. Collaborative AI System Design.</p>
           <div className="flex gap-6">
-            <a href="#" className="hover:text-slate-600 transition-colors">Documentation</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Security Policy</a>
-            <a href="#" className="hover:text-slate-600 transition-colors">Support</a>
+            <a href="#" className="hover:text-slate-600 transition-colors">GitHub Repo</a>
+            <a href="#" className="hover:text-slate-600 transition-colors">API Docs</a>
+            <a href="#" className="hover:text-slate-600 transition-colors">MLOps Guide</a>
           </div>
         </footer>
       </main>
